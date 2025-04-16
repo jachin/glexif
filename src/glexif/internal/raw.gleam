@@ -3,7 +3,6 @@ import file_streams/file_stream_error
 import gleam/bit_array
 import gleam/dict
 import gleam/int
-import gleam/io
 import gleam/list
 import gleam/option.{Some}
 import gleam/result
@@ -312,7 +311,7 @@ pub fn get_raw_entries(
       tiff_header,
     ))
     // need to reverse it one more time to get back the right order since
-    // the parse_data_or_offset also had to do its own reverse. 
+    // the parse_data_or_offset also had to do its own reverse.
     // Definitely should be a better way to do this, but it looks to work
     |> try_reverse_if_intel(tiff_header)
 
@@ -1002,8 +1001,8 @@ pub fn raw_exif_entry_to_parsed_tag(
       exif_tag.ExifTagRecord(..record, gps_speed: Some(gps_speed))
     }
 
-    u -> {
-      // io.debug(u)
+    _u -> {
+      // io.debug(_u)
       record
     }
   }
@@ -1123,7 +1122,7 @@ fn extract_signed_rational_to_fraction(data: BitArray) -> Fraction {
     _ -> panic as "wut?"
   }
 
-  // TODO: For now just treat as unsigned rational since my 
+  // TODO: For now just treat as unsigned rational since my
   // test data has this as positive values
   let numerator =
     data
@@ -1139,7 +1138,7 @@ fn extract_signed_rational_to_fraction(data: BitArray) -> Fraction {
   Fraction(numerator, denominator)
 }
 
-type OffsetLocation {
+pub type OffsetLocation {
   IFD
   // regular
   GPS
